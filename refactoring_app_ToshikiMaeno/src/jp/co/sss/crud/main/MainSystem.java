@@ -42,6 +42,9 @@ public class MainSystem {
 			// メニュー番号の入力
 			String menuNoStr = br.readLine();
 			menuNo = Integer.parseInt(menuNoStr);
+			
+			//部署IDの宣言
+			//String deptId = br.readLine();
 
 			// 機能の呼出
 			switch (menuNo) {
@@ -61,10 +64,10 @@ public class MainSystem {
 			case 3:
 				// 検索する部署IDを入力
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部)を入力してください:");
-				String deptIdA = br.readLine();
+				String deptId = br.readLine();
 
 				// 検索機能の呼出
-				DBController.findDeptId(deptIdA);
+				DBController.findDeptId(deptId);
 				break;
 
 			case 4:
@@ -76,10 +79,10 @@ public class MainSystem {
 				System.out.print("生年月日(西暦年/月/日):");
 				String birthday = br.readLine();
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
-				String deptIdB = br.readLine();
+				String deptId2 = br.readLine();
 
 				// 登録機能の呼出
-				DBController.insert(emp_name, Seibetsu, birthday, deptIdB);
+				DBController.insert(emp_name, Seibetsu, birthday, deptId2);
 				break;
 
 			case 5:
