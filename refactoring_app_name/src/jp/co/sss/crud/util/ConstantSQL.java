@@ -2,7 +2,7 @@ package jp.co.sss.crud.util;
 
 /**
  * 設定値をまとめたクラス(SQL関連)
- *
+ * 20250807_Test
  * @author System Shared
  *
  */
