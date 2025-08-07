@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 
-import jp.co.sss.crud.db.DBController;
+import jp.co.sss.crud.db.EmployeeDAO;
 
 /**
  * 社員情報管理システム開始クラス 社員情報管理システムはこのクラスから始まる。<br/>
@@ -42,15 +42,12 @@ public class MainSystem {
 			// メニュー番号の入力
 			String menuNoStr = br.readLine();
 			menuNo = Integer.parseInt(menuNoStr);
-			
-			//部署IDの宣言
-			//String deptId = br.readLine();
 
 			// 機能の呼出
 			switch (menuNo) {
 			case 1:
 				// 全件表示機能の呼出
-				DBController.findAllDisplay();
+				EmployeeDAO.findAllDisplay();
 				break;
 
 			case 2:
@@ -58,16 +55,17 @@ public class MainSystem {
 				System.out.print("社員名:");
 
 				// 検索機能の呼出
-				DBController.findEmployeeName();
+				EmployeeDAO.findEmployeeName();
 				break;
 
 			case 3:
 				// 検索する部署IDを入力
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部)を入力してください:");
 				String deptId = br.readLine();
+				int deptIdInt = Integer.parseInt(deptId);
 
 				// 検索機能の呼出
-				DBController.findDeptId(deptId);
+				EmployeeDAO.findDeptId(deptIdInt);
 				break;
 
 			case 4:
@@ -79,10 +77,10 @@ public class MainSystem {
 				System.out.print("生年月日(西暦年/月/日):");
 				String birthday = br.readLine();
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
-				String deptId2 = br.readLine();
+				String deptIdInsert = br.readLine();
 
 				// 登録機能の呼出
-				DBController.insert(emp_name, Seibetsu, birthday, deptId2);
+				EmployeeDAO.insert(emp_name, Seibetsu, birthday, deptIdInsert);
 				break;
 
 			case 5:
@@ -94,7 +92,7 @@ public class MainSystem {
 				Integer.parseInt(empId_1);
 
 				// 更新機能の呼出
-				DBController.update(empId_1);
+				EmployeeDAO.update(empId_1);
 				System.out.println("社員情報を更新しました");
 
 				break;
@@ -104,7 +102,7 @@ public class MainSystem {
 				System.out.print("削除する社員の社員IDを入力してください：");
 
 				// 削除機能の呼出
-				DBController.delete();
+				EmployeeDAO.delete();
 				break;
 
 			}

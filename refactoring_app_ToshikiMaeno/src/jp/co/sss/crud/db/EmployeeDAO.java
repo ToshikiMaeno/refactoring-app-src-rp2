@@ -15,10 +15,10 @@ import jp.co.sss.crud.util.ConstantSQL;
  *
  * @author System Shared
  */
-public class DBController {
+public class EmployeeDAO {
 
 	/** インスタンス化を禁止 */
-	private DBController() {
+	private EmployeeDAO() {
 	}
 
 	/**
@@ -169,7 +169,8 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findDeptId(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	//public static void findDeptId(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	public static void findDeptId(Integer deptId) throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -187,7 +188,7 @@ public class DBController {
 			preparedStatement = connection.prepareStatement(sql.toString());
 
 			// 検索条件となる値をバインド
-			preparedStatement.setString(1, deptId);
+			preparedStatement.setLong(1, deptId);
 
 			// SQL文を実行
 			resultSet = preparedStatement.executeQuery();
@@ -223,17 +224,27 @@ public class DBController {
 				System.out.print("\t");
 				System.out.print(resultSet.getString("birthday"));
 				System.out.print("\t");
-
+				
+				//System.out.println(resultSet.getString("dept_name"));
+				//String deptNameString = resultSet.getString("dept_name");
+				String deptNameString = resultSet.getString("dept_name");
+				//int deptId2 = Integer.parseInt(deptNameString);
+				
 				String deptIdString = resultSet.getString("dept_id");
 				int deptId2 = Integer.parseInt(deptIdString);
-				if (deptId2 == 1) {
+
+				//String deptIdString = resultSet.getString("dept_id");
+				//int deptId2 = Integer.parseInt(deptIdString);
+				if (deptNameString == "営業部") {
 					System.out.print("営業部");
-				} else if (deptId2 == 2) {
+				} else if (deptNameString == "経理部") {
 					System.out.print("経理部");
-				} else if (gender == 3) {
+				} else if (deptNameString == "総務部") {
 					System.out.print("総務部");
 
-				}
+				} else {
+					System.out.print("該当なし");
+				};
 
 			}
 
