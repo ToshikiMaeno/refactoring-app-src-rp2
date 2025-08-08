@@ -12,7 +12,7 @@ public class ConstantMsg {
 	public static final String MENU_MESSAGE_7 = "7.終了";
 	public static final String MENU_MESSAGE_INPUT = "メニュー番号を入力してください：";
 	public static final String MENU_MESSAGE_ALL_DISPLAY = MENU_MESSAGE + "\n" + MENU_MESSAGE_1 + "\n" + MENU_MESSAGE_2 + 
-			"\n"+ MENU_MESSAGE_1 + "\n" + MENU_MESSAGE_3 + "\n"+ MENU_MESSAGE_4 + "\n" + MENU_MESSAGE_5 +
+			"\n" + MENU_MESSAGE_3 + "\n"+ MENU_MESSAGE_4 + "\n" + MENU_MESSAGE_5 +
 			"\n"+ MENU_MESSAGE_6 + "\n" + MENU_MESSAGE_7 + "\n"+ MENU_MESSAGE_INPUT;
 	
 	public static final String MENU_MESSAGE_EMPLOYEE_NAME = "社員名:";
