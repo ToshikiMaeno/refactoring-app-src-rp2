@@ -58,7 +58,10 @@ public class ConstantSQL {
 
 	/** 登録 */
 	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(seq_emp.NEXTVAL, ?, ?, ?, ?)";
-	public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, ?, ?, ?, ?)";
+	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, ?, ?, ?, ?)";
+	
+	public static final String SQL_INSERT = "INSERT INTO employee VALUES(nextval('seq_emp'), ?, ?, ?, ?)";
+	
 	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, '鈴木三郎', 1, '1990/11/11', 1)";
 
 	/** 更新 */

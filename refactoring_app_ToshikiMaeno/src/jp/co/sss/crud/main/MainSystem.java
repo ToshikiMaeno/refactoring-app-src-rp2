@@ -79,28 +79,9 @@ public class MainSystem {
 				String Seibetsu = br.readLine();
 				int Seibetsu2 = Integer.parseInt(Seibetsu);
 				System.out.print("生年月日(西暦年/月/日):");
-				//String birthday = br.readLine();
 				String birthday = br.readLine();
-				//SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-				//SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
-				
-				//SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
-				//Date birthday2 = (Date) sdFormat.parse(birthday);
-				//Date birthday2 = (Date) sdFormat.parse(birthday);
-				String strDate2 = "2018-12-31";
-				
-				
 				String strDate = birthday.replaceAll("/", "-");
-				
-				//String strDate = "2018/12/31";
-				//Date birthday2 = java.sql.Date.valueOf(strDate);
-				
-				//Date birthday2 = java.sql.Date.valueOf(strDate);
-				
-				//上手くいく
 				Date birthday2 = java.sql.Date.valueOf(strDate);
-				
-				
 				
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
 				String deptIdInsert = br.readLine();
