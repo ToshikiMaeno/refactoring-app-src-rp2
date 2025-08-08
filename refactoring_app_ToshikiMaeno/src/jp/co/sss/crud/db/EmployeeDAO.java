@@ -336,7 +336,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
 	//public static void findDeptId(String deptId) throws ClassNotFoundException, SQLException, IOException {
-	public static void findDeptId(Integer deptId) throws ClassNotFoundException, SQLException, IOException {
+	public static void findDeptId2(Integer deptId) throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -427,6 +427,94 @@ public class EmployeeDAO implements IEmployeeDAO {
 			DBManager.close(connection);
 		}
 	}
+	
+	public static List<Employee> findDeptId() throws ClassNotFoundException, SQLException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = null;
+		Department department = null;
+		
+		System.out.print(ConstantMsg.MENU_MESSAGE_DEPTID_INPUT);
+		
+		String deptId2 = br.readLine();
+		int deptId = Integer.parseInt(deptId2);
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		
+
+		try {
+			// DBに接続
+			connection = DBManager.getConnection();
+
+			// SQL文を準備
+			StringBuffer sql = new StringBuffer(ConstantSQL.SQL_SELECT_BASIC);
+			sql.append(ConstantSQL.SQL_SELECT_BY_DEPT_ID);
+
+			// ステートメントの作成
+			preparedStatement = connection.prepareStatement(sql.toString());
+
+			// 検索条件となる値をバインド
+			preparedStatement.setInt(1, deptId);
+
+			// SQL文を実行
+			resultSet = preparedStatement.executeQuery();
+			
+			
+			
+
+			if (!resultSet.isBeforeFirst()) {
+				System.out.println("該当者はいませんでした");
+				return employees;
+			}
+
+			//System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			while (resultSet.next()) {
+				
+				
+				
+				
+				
+				
+				
+				employee = new Employee();
+				employee.setEmpId(resultSet.getInt("emp_id"));
+				employee.setEmpName(resultSet.getString("emp_name"));
+				employee.setGender(resultSet.getInt("gender"));
+				employee.setBirthday(resultSet.getString("birthday"));
+
+				department = new Department();
+				department.setDeptName(resultSet.getString("dept_name"));
+				employee.setDepartment(department);
+
+				employees.add(employee);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+			}
+
+		} finally {
+			// クローズ処理
+			DBManager.close(resultSet);
+			// Statementをクローズ
+			DBManager.close(preparedStatement);
+			// DBとの接続を切断
+			DBManager.close(connection);
+		}
+		return employees;
+	}
 
 	/**
 	 * 社員情報を1件登録
@@ -439,7 +527,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException            DB処理でエラーが発生した場合に送出
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 */
-	public static void insert(String empName, Integer gender, Date birthday2, Integer deptId)
+	public static void insert2(String empName, Integer gender, Date birthday2, Integer deptId)
 			throws ClassNotFoundException, SQLException, IOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -470,6 +558,73 @@ public class EmployeeDAO implements IEmployeeDAO {
 		}
 	}
 	
+	public static List<Employee> insert()
+			throws ClassNotFoundException, SQLException, IOException {
+		
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = null;
+		Department department = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		
+		// 登録する値を入力
+		System.out.print(ConstantMsg.MENU_MESSAGE_EMPLOYEE_NAME);
+		String emp_name = br.readLine();
+		System.out.print(ConstantMsg.MENU_MESSAGE_GENERAL);
+		String Seibetsu = br.readLine();
+		int Seibetsu2 = Integer.parseInt(Seibetsu);
+		System.out.print(ConstantMsg.MENU_MESSAGE_BIRTHDAY);
+		String birthday = br.readLine();
+		String strDate = birthday.replaceAll("/", "-");
+		Date birthday2 = java.sql.Date.valueOf(strDate);
+		
+		System.out.print(ConstantMsg.MENU_MESSAGE_DEPTID);
+		String deptIdInsert = br.readLine();
+		int deptIdInt2 = Integer.parseInt(deptIdInsert);
+
+		// 登録機能の呼出
+		//EmployeeDAO.insert(emp_name, Seibetsu2, birthday2, deptIdInt2);
+		
+		
+		
+		
+		
+		
+		
+		try {
+			// DBに接続
+			connection = DBManager.getConnection();
+
+			// ステートメントを作成
+			preparedStatement = connection.prepareStatement(ConstantSQL.SQL_INSERT);
+
+			// 入力値をバインド
+			preparedStatement.setString(1, emp_name);
+			//preparedStatement.setString(2, gender);
+			preparedStatement.setInt(2, Seibetsu2);
+			//preparedStatement.setString(3, birthday);
+			preparedStatement.setDate(3, birthday2);
+			//preparedStatement.setString(4, deptId);
+			preparedStatement.setInt(4, deptIdInt2);
+			
+			
+
+			// SQL文を実行
+			preparedStatement.executeUpdate();
+
+			// 登録完了メッセージを出力
+			System.out.println("社員情報を登録しました");
+		} finally {
+			DBManager.close(preparedStatement);
+			DBManager.close(connection);
+		}
+		return employees;
+	}
+	
 	/**
 	 * 社員情報を1件更新
 	 * 
@@ -478,7 +633,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException            DB処理でエラーが発生した場合に送出
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 */
-	public static void update(Integer empId)
+	public static void update2(Integer empId)
 			throws ClassNotFoundException, SQLException, IOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -525,6 +680,68 @@ public class EmployeeDAO implements IEmployeeDAO {
 			DBManager.close(connection);
 		}
 	}
+	
+	public static List<Employee> update()
+			throws ClassNotFoundException, SQLException, IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = null;
+		Department department = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		// 更新する値を入力する
+		System.out.print(ConstantMsg.MENU_MESSAGE_EMPLOYEE_UPDATE_INPUT);
+		String empId_1 = br.readLine();
+		int empId = Integer.parseInt(empId_1);
+
+		try {
+			// データベースに接続
+			connection = DBManager.getConnection();
+
+			// ステートメントの作成
+			preparedStatement = connection.prepareStatement(ConstantSQL.SQL_UPDATE);
+
+			System.out.print("社員名：");
+			String emp_name = br.readLine();
+			// 性別を入力
+			System.out.print("性別(0:回答しない, 1:男性, 2:女性, 9:その他):");
+			String gender2 = br.readLine();
+			int gender = Integer.parseInt(gender2);
+			// 誕生日を入力
+			System.out.print("生年月日(西暦年/月/日)：");
+			String birthday2 = br.readLine();
+			String strDate = birthday2.replaceAll("/", "-");
+			Date birthday = java.sql.Date.valueOf(strDate);
+
+			// 部署IDを入力
+			System.out.print("部署ID(1：営業部、2：経理部、3：総務部)：");
+			String deptId2 = br.readLine();
+			int deptId = Integer.parseInt(deptId2);
+
+			// 入力値をバインド
+			preparedStatement.setString(1, emp_name);
+			preparedStatement.setInt(2, gender);
+			preparedStatement.setDate(3, birthday);
+			preparedStatement.setInt(4, deptId);
+			//preparedStatement.setInt(5, empId);
+			preparedStatement.setInt(5, empId);
+
+			// SQL文の実行(失敗時は戻り値0)
+			preparedStatement.executeUpdate();
+			System.out.println(ConstantMsg.MENU_MESSAGE_EMPLOYEE_INFORMATION_UPDATE);
+
+		} finally {
+			// クローズ処理
+			DBManager.close(preparedStatement);
+			// DBとの接続を切断
+			DBManager.close(connection);
+		}
+		return employees;
+	}
 
 	/**
 	 * 社員情報を1件削除
@@ -533,7 +750,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void delete(Integer empId) {
+	public static void delete2(Integer empId) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -570,5 +787,61 @@ public class EmployeeDAO implements IEmployeeDAO {
 			}
 			// DBとの接続を切断
 		}
+	}
+	
+	public static List<Employee> delete() throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = null;
+		Department department = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		// 社員名検索
+		System.out.print(ConstantMsg.MENU_MESSAGE_EMPLOYEE_DELETE_INPUT);
+		// 検索ワード
+		//String empId2 = br.readLine();
+		
+		String empId2 = br.readLine();
+		int empId = Integer.parseInt(empId2);
+		
+
+		try {
+			// データベースに接続
+			connection = DBManager.getConnection();
+			//String empId = br.readLine();
+
+			// ステートメントの作成
+			preparedStatement = connection.prepareStatement(ConstantSQL.SQL_DELETE);
+
+			// 社員名をバインド
+			//preparedStatement.setString(1, empId);
+			preparedStatement.setInt(1, empId);
+
+			// SQL文の実行(失敗時は戻り値0)
+			preparedStatement.executeUpdate();
+
+			//System.out.println("社員情報を削除しました");
+			System.out.println(ConstantMsg.MENU_MESSAGE_EMPLOYEE_INFORMATION_DELETE);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		finally {
+			// Statementをクローズ
+			try {
+				DBManager.close(preparedStatement);
+				DBManager.close(connection);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// DBとの接続を切断
+		}
+		return employees;
 	}
 }

@@ -20,6 +20,6 @@ public class EmployeeFindByEmpNameService implements IEmployeeService {
 		searchEmployees = employeeDAO.findEmployeeName();
 		
 		ConsoleWriter.showEmployees(searchEmployees);
-		System.out.println("test2");//改行
+		//System.out.println("test2");//改行
 	}
 }
