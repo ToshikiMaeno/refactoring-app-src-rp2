@@ -16,11 +16,14 @@ import jp.co.sss.crud.util.ConstantSQL;
  *
  * @author System Shared
  */
-public class EmployeeDAO {
+public class EmployeeDAO implements IEmployeeDAO {
 
 	/** インスタンス化を禁止 */
-	private EmployeeDAO() {
-	}
+	//private EmployeeDAO() {
+	//}
+	
+	//public EmployeeDAO() {
+	//}
 
 	/**
 	 * 全ての社員情報を検索
