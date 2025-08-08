@@ -54,10 +54,11 @@ public class MainSystem {
 
 			case 2:
 				// 社員名検索
-				System.out.print(ConstantMsg.MENU_MESSAGE_EMPLOYEE_NAME);
+				//System.out.print(ConstantMsg.MENU_MESSAGE_EMPLOYEE_NAME);
+				//System.out.print("あああ");
 
 				// 検索機能の呼出
-				EmployeeDAO.findEmployeeName();
+				//EmployeeDAO.findEmployeeName2();
 				break;
 
 			case 3:

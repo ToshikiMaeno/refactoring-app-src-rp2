@@ -13,6 +13,7 @@ import java.util.List;
 
 import jp.co.sss.crud.dto.Department;
 import jp.co.sss.crud.dto.Employee;
+import jp.co.sss.crud.util.ConstantMsg;
 import jp.co.sss.crud.util.ConstantSQL;
 
 /**
@@ -163,7 +164,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findEmployeeName() throws ClassNotFoundException, SQLException, IOException {
+	public static void findEmployeeName2() throws ClassNotFoundException, SQLException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		// 検索ワード
@@ -233,6 +234,98 @@ public class EmployeeDAO implements IEmployeeDAO {
 			// DBとの接続を切断
 			DBManager.close(connection);
 		}
+	}
+	
+	public static List<Employee> findEmployeeName() throws ClassNotFoundException, SQLException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = null;
+		Department department = null;
+		
+		// 社員名検索
+		System.out.print(ConstantMsg.MENU_MESSAGE_EMPLOYEE_NAME);
+
+		// 検索ワード
+		String searchWord = br.readLine();
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			// DBに接続
+			connection = DBManager.getConnection();
+
+			// SQL文を準備
+			StringBuffer sql = new StringBuffer(ConstantSQL.SQL_SELECT_BASIC);
+			sql.append(ConstantSQL.SQL_SELECT_BY_EMP_NAME);
+
+			// ステートメントの作成
+			preparedStatement = connection.prepareStatement(sql.toString());
+
+			// 検索条件となる値をバインド
+			preparedStatement.setString(1, "%" + searchWord + "%");
+
+			// SQL文を実行
+			resultSet = preparedStatement.executeQuery();
+			if (!resultSet.isBeforeFirst()) {
+				System.out.println("該当者はいませんでした");
+				return employees;
+			}
+
+			//System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			while (resultSet.next()) {
+			//	System.out.print(resultSet.getString("emp_id"));
+			//	System.out.print("\t");
+
+			//	System.out.print(resultSet.getString("emp_name"));
+			//	System.out.print("\t");
+
+			//	String genderString = resultSet.getString("gender");
+			//	int gender = Integer.parseInt(genderString);
+			//	if (gender == 0) {
+			//		System.out.print("回答なし");
+			//	} else if (gender == 1) {
+			//		System.out.print("男性");
+
+			//	} else if (gender == 2) {
+			//		System.out.print("女性");
+
+			//	} else if (gender == 9) {
+			//		System.out.print("その他");
+
+			//	}
+
+			//	System.out.print("\t");
+			//	System.out.print(resultSet.getString("birthday"));
+			//	System.out.print("\t");
+
+			//	System.out.println(resultSet.getString("dept_name"));
+				
+				
+				employee = new Employee();
+				employee.setEmpId(resultSet.getInt("emp_id"));
+				employee.setEmpName(resultSet.getString("emp_name"));
+				employee.setGender(resultSet.getInt("gender"));
+				employee.setBirthday(resultSet.getString("birthday"));
+
+				department = new Department();
+				department.setDeptName(resultSet.getString("dept_name"));
+				employee.setDepartment(department);
+
+				employees.add(employee);
+
+			}
+
+		} finally {
+			// クローズ処理
+			DBManager.close(resultSet);
+			// Statementをクローズ
+			DBManager.close(preparedStatement);
+			// DBとの接続を切断
+			DBManager.close(connection);
+		}
+		return employees;
 	}
 
 	/**

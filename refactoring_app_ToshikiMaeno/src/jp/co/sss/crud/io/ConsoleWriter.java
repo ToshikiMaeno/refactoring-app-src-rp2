@@ -11,6 +11,7 @@ public class ConsoleWriter {
 		} else {
 			//showHeader();
 			
+			
 			System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
 			for (Employee employee : employees) {
 				
