@@ -99,10 +99,10 @@ public class MainSystem {
 
 				// 更新する値を入力する
 				String empId_1 = br.readLine();
-				Integer.parseInt(empId_1);
+				int empId_2 = Integer.parseInt(empId_1);
 
 				// 更新機能の呼出
-				EmployeeDAO.update(empId_1);
+				EmployeeDAO.update(empId_2);
 				System.out.println("社員情報を更新しました");
 
 				break;
@@ -110,9 +110,14 @@ public class MainSystem {
 			case 6:
 				// 削除する社員IDを入力
 				System.out.print("削除する社員の社員IDを入力してください：");
+				
+				// 更新する値を入力する
+				String empId_3 = br.readLine();
+				int empId_4 = Integer.parseInt(empId_3);
 
 				// 削除機能の呼出
-				EmployeeDAO.delete();
+				EmployeeDAO.delete(empId_4);
+				System.out.println("社員情報を削除しました");
 				break;
 
 			}

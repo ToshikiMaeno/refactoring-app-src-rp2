@@ -58,15 +58,13 @@ public class ConstantSQL {
 
 	/** 登録 */
 	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(seq_emp.NEXTVAL, ?, ?, ?, ?)";
-	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, ?, ?, ?, ?)";
-	
 	public static final String SQL_INSERT = "INSERT INTO employee VALUES(nextval('seq_emp'), ?, ?, ?, ?)";
-	
-	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, '鈴木三郎', 1, '1990/11/11', 1)";
 
 	/** 更新 */
 	public static final String SQL_UPDATE = "UPDATE employee SET emp_name = ?, gender = ?, "
 			+ "birthday = ?, dept_id = ? " + "WHERE emp_id = ?";
+	
+	//public static final String SQL_UPDATE = "UPDATE employee SET emp_name = '鈴木四郎', gender = 1, birthday = '1999/12/11', dept_id = 2 WHERE emp_id = 14";
 
 	/** 削除 */
 	public static final String SQL_DELETE = "DELETE FROM employee WHERE emp_id = ?";
