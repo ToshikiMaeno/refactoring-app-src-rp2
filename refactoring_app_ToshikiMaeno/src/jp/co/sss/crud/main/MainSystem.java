@@ -41,7 +41,6 @@ public class MainSystem {
 			System.out.println("6.削除");
 			System.out.println("7.終了");
 			System.out.print("メニュー番号を入力してください：");
-			//Githubでブランチ削除したものをリストアをし、リストアされているかの確認
 
 			// メニュー番号の入力
 			String menuNoStr = br.readLine();
