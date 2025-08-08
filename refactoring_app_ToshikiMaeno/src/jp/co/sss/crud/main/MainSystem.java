@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import jp.co.sss.crud.db.EmployeeDAO;
+import jp.co.sss.crud.service.IEmployeeService;
 import jp.co.sss.crud.util.ConstantMsg;
 
 /**
@@ -38,12 +39,17 @@ public class MainSystem {
 			// メニュー番号の入力
 			String menuNoStr = br.readLine();
 			menuNo = Integer.parseInt(menuNoStr);
+			
+			//ビジネスロジックの呼び出し
+			IEmployeeService service = IEmployeeService.getInstanceByMenuNo(menuNo);
+			service.execute();
 
 			// 機能の呼出
 			switch (menuNo) {
 			case 1:
 				// 全件表示機能の呼出
-				EmployeeDAO.findAllDisplay();
+				//EmployeeDAO.findAllDisplay2();
+				
 				break;
 
 			case 2:
