@@ -115,28 +115,9 @@ public class EmployeeDAO implements IEmployeeDAO {
 				return employees;
 			}
 
-			// レコードを出力
-			System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			
 			while (resultSet.next()) {
-				System.out.print(resultSet.getString("emp_id") + "\t");
-				System.out.print(resultSet.getString("emp_name") + "\t");
-
-				int gender = Integer.parseInt(resultSet.getString("gender"));
-				if (gender == 0) {
-					System.out.print("回答なし" + "\t");
-				} else if (gender == 1) {
-					System.out.print("男性" + "\t");
-
-				} else if (gender == 2) {
-					System.out.print("女性" + "\t");
-
-				} else if (gender == 9) {
-					System.out.print("その他" + "\t");
-
-				}
-
-				System.out.print(resultSet.getString("birthday") + "\t");
-				System.out.println(resultSet.getString("dept_name"));
+				
 				
 				
 				
@@ -144,14 +125,21 @@ public class EmployeeDAO implements IEmployeeDAO {
 				
 				employee = new Employee();
 				employee.setEmpId(resultSet.getInt("emp_id"));
+				;
+				//int gender2 = Integer.parseInt(resultSet.getString("emp_id"));
+				//employee.setEmpId(gender2);
+				
 				employee.setEmpName(resultSet.getString("emp_name"));
 				employee.setGender(resultSet.getInt("gender"));
 				employee.setBirthday(resultSet.getString("birthday"));
 
 				department = new Department();
 				department.setDeptName(resultSet.getString("dept_name"));
+				
+				//修正する
 				//department.setDeptId(resultSet.getInt("dept_id"));
 				//employee.setDeptId(department);
+				employee.setDepartment(department);
 
 				employees.add(employee);
 			}

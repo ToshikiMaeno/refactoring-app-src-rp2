@@ -3,17 +3,30 @@ package jp.co.sss.crud.dto;
 public class Department {
 	private Integer deptId;
 	private String deptName;
-	public void setDeptName(String string) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+	
+	public Department() {
 	}
-	//public void setDepartment(Department department) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	//}
+
+	public Department(Integer deptId, String deptName) {
+		super();
+		this.deptId = deptId;
+		this.deptName = deptName;
+	}
+	
+	public Integer getDeptId() {
+		return deptId;
+	}
+
 	public void setDeptId(Integer deptId) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+		this.deptId = deptId;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 	
 	

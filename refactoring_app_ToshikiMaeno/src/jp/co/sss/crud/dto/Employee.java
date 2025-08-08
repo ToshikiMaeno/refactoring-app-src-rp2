@@ -6,14 +6,14 @@ public class Employee {
 	private Integer gender;
 	private String birthday;
 	//private Department department;
-	private Integer dept_id;
-	public Employee(Integer empId, String empName, Integer gender, String birthday, Integer dept_id) {
+	private Department department;
+	public Employee(Integer empId, String empName, Integer gender, String birthday, Department department) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
 		this.gender = gender;
 		this.birthday = birthday;
-		this.dept_id = dept_id;
+		this.department = department;
 	}
 	public Employee() {
 		// TODO 自動生成されたコンストラクター・スタブ
@@ -22,11 +22,11 @@ public class Employee {
 		// TODO 自動生成されたコンストラクター・スタブ
 	//}
 	public void setEmpId(Integer empId) {
-		// TODO 自動生成されたメソッド・スタブ
+		this.empId = empId;
 		
 	}
-	public void setGender(Integer int1) {
-		// TODO 自動生成されたメソッド・スタブ
+	public void setGender(Integer gender) {
+		this.gender = gender;
 		
 	}
 	public void setEmpName(String empName) {
@@ -34,15 +34,29 @@ public class Employee {
 		this.empName = empName;
 		
 	}
-	public void setBirthday(String string) {
-		// TODO 自動生成されたメソッド・スタブ
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 		
 	}
-	public void setDeptId(Integer int1) {
-		// TODO 自動生成されたメソッド・スタブ
+	public void setDepartment(Department department) {
+		this.department = department;
 		
+	}
+	
+	
+	public Integer getEmpId() {
+		return empId;
+	}
+	public Integer getGender() {
+		return gender;
 	}
 	public String getEmpName() {
 		return empName;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public Department getDepartment() {
+		return department;
 	}
 }
