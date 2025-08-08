@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,10 +16,10 @@ import jp.co.sss.crud.util.ConstantSQL;
  *
  * @author System Shared
  */
-public class DBController {
+public class EmployeeDAO {
 
 	/** インスタンス化を禁止 */
-	private DBController() {
+	private EmployeeDAO() {
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class DBController {
 	 * @throws ClassNotFoundException ドライバクラスが不在の場合に送出
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 */
-	public static void find() throws ClassNotFoundException, SQLException {
+	public static void findAllDisplay() throws ClassNotFoundException, SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -90,7 +91,7 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findB() throws ClassNotFoundException, SQLException, IOException {
+	public static void findEmployeeName() throws ClassNotFoundException, SQLException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		// 検索ワード
@@ -169,7 +170,8 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findC(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	//public static void findDeptId(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	public static void findDeptId(Integer deptId) throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -187,7 +189,7 @@ public class DBController {
 			preparedStatement = connection.prepareStatement(sql.toString());
 
 			// 検索条件となる値をバインド
-			preparedStatement.setString(1, deptId);
+			preparedStatement.setInt(1, deptId);
 
 			// SQL文を実行
 			resultSet = preparedStatement.executeQuery();
@@ -223,17 +225,31 @@ public class DBController {
 				System.out.print("\t");
 				System.out.print(resultSet.getString("birthday"));
 				System.out.print("\t");
+				
+				//System.out.println(resultSet.getString("dept_name"));
+				//String deptNameString = resultSet.getString("dept_name");
+				//String deptNameString = resultSet.getString("dept_name");
+				//int deptId2 = Integer.parseInt(deptNameString);
+				
+				//System.out.println(deptId);
+				
+				//String deptIdString = resultSet.getString("dept_id");
+				//int deptId2 = Integer.parseInt(deptIdString);
 
-				String deptIdString = resultSet.getString("dept_id");
-				int deptId2 = Integer.parseInt(deptIdString);
-				if (deptId2 == 1) {
-					System.out.print("営業部");
-				} else if (deptId2 == 2) {
-					System.out.print("経理部");
-				} else if (gender == 3) {
-					System.out.print("総務部");
+				//String deptIdString = resultSet.getString("dept_id");
+				//int deptId2 = Integer.parseInt(deptIdString);
+				if (deptId == 1) {
+					System.out.println("営業部");
+				} else if (deptId == 2) {
+					System.out.println("経理部");
+				} else if (deptId == 3) {
+					System.out.println("総務部");
 
-				}
+				} else {
+					System.out.println("該当なし");
+				};
+				
+				//System.out.print("\n");
 
 			}
 
@@ -252,13 +268,13 @@ public class DBController {
 	 * 
 	 * @param empName 社員名
 	 * @param gender 性別
-	 * @param birthday 生年月日
+	 * @param birthday2 生年月日
 	 * @param deptId 部署ID
 	 * @throws ClassNotFoundException ドライバクラスが不在の場合に送出
 	 * @throws SQLException            DB処理でエラーが発生した場合に送出
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 */
-	public static void insert(String empName, String gender, String birthday, String deptId)
+	public static void insert(String empName, Integer gender, Date birthday2, Integer deptId)
 			throws ClassNotFoundException, SQLException, IOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -271,9 +287,12 @@ public class DBController {
 
 			// 入力値をバインド
 			preparedStatement.setString(1, empName);
-			preparedStatement.setString(2, gender);
-			preparedStatement.setString(3, birthday);
-			preparedStatement.setString(4, deptId);
+			//preparedStatement.setString(2, gender);
+			preparedStatement.setInt(2, gender);
+			//preparedStatement.setString(3, birthday);
+			preparedStatement.setDate(3, birthday2);
+			//preparedStatement.setString(4, deptId);
+			preparedStatement.setInt(4, deptId);
 
 			// SQL文を実行
 			preparedStatement.executeUpdate();
@@ -285,7 +304,7 @@ public class DBController {
 			DBManager.close(connection);
 		}
 	}
-
+	
 	/**
 	 * 社員情報を1件更新
 	 * 
@@ -294,7 +313,7 @@ public class DBController {
 	 * @throws SQLException            DB処理でエラーが発生した場合に送出
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 */
-	public static void update(String empId)
+	public static void update(Integer empId)
 			throws ClassNotFoundException, SQLException, IOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -311,21 +330,25 @@ public class DBController {
 			String emp_name = br.readLine();
 			// 性別を入力
 			System.out.print("性別(0:回答しない, 1:男性, 2:女性, 9:その他):");
-			String gender = br.readLine();
+			String gender2 = br.readLine();
+			int gender = Integer.parseInt(gender2);
 			// 誕生日を入力
 			System.out.print("生年月日(西暦年/月/日)：");
-			String birthday = br.readLine();
+			String birthday2 = br.readLine();
+			String strDate = birthday2.replaceAll("/", "-");
+			Date birthday = java.sql.Date.valueOf(strDate);
 
 			// 部署IDを入力
 			System.out.print("部署ID(1：営業部、2：経理部、3：総務部)：");
-			String deptId = br.readLine();
+			String deptId2 = br.readLine();
+			int deptId = Integer.parseInt(deptId2);
 
 			// 入力値をバインド
 			preparedStatement.setString(1, emp_name);
-			preparedStatement.setString(2, gender);
-			preparedStatement.setString(3, birthday);
-			preparedStatement.setString(4, deptId);
-			preparedStatement.setString(5, empId);
+			preparedStatement.setInt(2, gender);
+			preparedStatement.setDate(3, birthday);
+			preparedStatement.setInt(4, deptId);
+			preparedStatement.setInt(5, empId);
 
 			// SQL文の実行(失敗時は戻り値0)
 			preparedStatement.executeUpdate();
@@ -345,7 +368,7 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void delete() {
+	public static void delete(Integer empId) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -353,18 +376,19 @@ public class DBController {
 		try {
 			// データベースに接続
 			connection = DBManager.getConnection();
-			String empId = br.readLine();
+			//String empId = br.readLine();
 
 			// ステートメントの作成
 			preparedStatement = connection.prepareStatement(ConstantSQL.SQL_DELETE);
 
 			// 社員名をバインド
-			preparedStatement.setString(1, empId);
+			//preparedStatement.setString(1, empId);
+			preparedStatement.setInt(1, empId);
 
 			// SQL文の実行(失敗時は戻り値0)
 			preparedStatement.executeUpdate();
 
-			System.out.println("社員情報を削除しました");
+			//System.out.println("社員情報を削除しました");
 
 		} catch (Exception e) {
 			e.printStackTrace();

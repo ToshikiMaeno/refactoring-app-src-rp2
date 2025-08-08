@@ -57,11 +57,14 @@ public class ConstantSQL {
 	public static final String SQL_SELECT_BY_DEPT_ID = "WHERE e.dept_id = ? ORDER BY e.emp_id";
 
 	/** 登録 */
-	public static final String SQL_INSERT = "INSERT INTO employee VALUES(seq_emp.NEXTVAL, ?, ?, ?, ?)";
+	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(seq_emp.NEXTVAL, ?, ?, ?, ?)";
+	public static final String SQL_INSERT = "INSERT INTO employee VALUES(nextval('seq_emp'), ?, ?, ?, ?)";
 
 	/** 更新 */
 	public static final String SQL_UPDATE = "UPDATE employee SET emp_name = ?, gender = ?, "
 			+ "birthday = ?, dept_id = ? " + "WHERE emp_id = ?";
+	
+	//public static final String SQL_UPDATE = "UPDATE employee SET emp_name = '鈴木四郎', gender = 1, birthday = '1999/12/11', dept_id = 2 WHERE emp_id = 14";
 
 	/** 削除 */
 	public static final String SQL_DELETE = "DELETE FROM employee WHERE emp_id = ?";
