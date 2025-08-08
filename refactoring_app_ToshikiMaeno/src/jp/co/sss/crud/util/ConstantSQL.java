@@ -57,7 +57,9 @@ public class ConstantSQL {
 	public static final String SQL_SELECT_BY_DEPT_ID = "WHERE e.dept_id = ? ORDER BY e.emp_id";
 
 	/** 登録 */
-	public static final String SQL_INSERT = "INSERT INTO employee VALUES(seq_emp.NEXTVAL, ?, ?, ?, ?)";
+	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(seq_emp.NEXTVAL, ?, ?, ?, ?)";
+	public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, ?, ?, ?, ?)";
+	//public static final String SQL_INSERT = "INSERT INTO employee VALUES(4, '鈴木三郎', 1, '1990/11/11', 1)";
 
 	/** 更新 */
 	public static final String SQL_UPDATE = "UPDATE employee SET emp_name = ?, gender = ?, "

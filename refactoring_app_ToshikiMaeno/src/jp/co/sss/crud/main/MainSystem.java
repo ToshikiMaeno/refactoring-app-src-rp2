@@ -3,7 +3,9 @@ package jp.co.sss.crud.main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import jp.co.sss.crud.db.EmployeeDAO;
 
@@ -21,8 +23,9 @@ public class MainSystem {
 	 * @throws IOException 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, ParseException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int menuNo = 0;
@@ -74,13 +77,39 @@ public class MainSystem {
 				String emp_name = br.readLine();
 				System.out.print("性別(0:その他, 1:男性, 2:女性, 9:回答なし):");
 				String Seibetsu = br.readLine();
+				int Seibetsu2 = Integer.parseInt(Seibetsu);
 				System.out.print("生年月日(西暦年/月/日):");
+				//String birthday = br.readLine();
 				String birthday = br.readLine();
+				//SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+				//SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+				
+				//SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+				//Date birthday2 = (Date) sdFormat.parse(birthday);
+				//Date birthday2 = (Date) sdFormat.parse(birthday);
+				String strDate2 = "2018-12-31";
+				
+				
+				String strDate = birthday.replaceAll("/", "-");
+				
+				//String strDate = "2018/12/31";
+				//Date birthday2 = java.sql.Date.valueOf(strDate);
+				
+				//Date birthday2 = java.sql.Date.valueOf(strDate);
+				
+				//上手くいく
+				Date birthday2 = java.sql.Date.valueOf(strDate);
+				
+				
+				
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
 				String deptIdInsert = br.readLine();
+				int deptIdInt2 = Integer.parseInt(deptIdInsert);
 
 				// 登録機能の呼出
-				EmployeeDAO.insert(emp_name, Seibetsu, birthday, deptIdInsert);
+				EmployeeDAO.insert(emp_name, Seibetsu2, birthday2, deptIdInt2);
+				//EmployeeDAO.insert2();
+				//EmployeeDAO.findAllDisplay();
 				break;
 
 			case 5:

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -188,7 +189,7 @@ public class EmployeeDAO {
 			preparedStatement = connection.prepareStatement(sql.toString());
 
 			// 検索条件となる値をバインド
-			preparedStatement.setLong(1, deptId);
+			preparedStatement.setInt(1, deptId);
 
 			// SQL文を実行
 			resultSet = preparedStatement.executeQuery();
@@ -227,24 +228,28 @@ public class EmployeeDAO {
 				
 				//System.out.println(resultSet.getString("dept_name"));
 				//String deptNameString = resultSet.getString("dept_name");
-				String deptNameString = resultSet.getString("dept_name");
+				//String deptNameString = resultSet.getString("dept_name");
 				//int deptId2 = Integer.parseInt(deptNameString);
 				
-				String deptIdString = resultSet.getString("dept_id");
-				int deptId2 = Integer.parseInt(deptIdString);
+				//System.out.println(deptId);
+				
+				//String deptIdString = resultSet.getString("dept_id");
+				//int deptId2 = Integer.parseInt(deptIdString);
 
 				//String deptIdString = resultSet.getString("dept_id");
 				//int deptId2 = Integer.parseInt(deptIdString);
-				if (deptNameString == "営業部") {
-					System.out.print("営業部");
-				} else if (deptNameString == "経理部") {
-					System.out.print("経理部");
-				} else if (deptNameString == "総務部") {
-					System.out.print("総務部");
+				if (deptId == 1) {
+					System.out.println("営業部");
+				} else if (deptId == 2) {
+					System.out.println("経理部");
+				} else if (deptId == 3) {
+					System.out.println("総務部");
 
 				} else {
-					System.out.print("該当なし");
+					System.out.println("該当なし");
 				};
+				
+				//System.out.print("\n");
 
 			}
 
@@ -263,13 +268,13 @@ public class EmployeeDAO {
 	 * 
 	 * @param empName 社員名
 	 * @param gender 性別
-	 * @param birthday 生年月日
+	 * @param birthday2 生年月日
 	 * @param deptId 部署ID
 	 * @throws ClassNotFoundException ドライバクラスが不在の場合に送出
 	 * @throws SQLException            DB処理でエラーが発生した場合に送出
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 */
-	public static void insert(String empName, String gender, String birthday, String deptId)
+	public static void insert(String empName, Integer gender, Date birthday2, Integer deptId)
 			throws ClassNotFoundException, SQLException, IOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -282,9 +287,34 @@ public class EmployeeDAO {
 
 			// 入力値をバインド
 			preparedStatement.setString(1, empName);
-			preparedStatement.setString(2, gender);
-			preparedStatement.setString(3, birthday);
-			preparedStatement.setString(4, deptId);
+			//preparedStatement.setString(2, gender);
+			preparedStatement.setInt(2, gender);
+			//preparedStatement.setString(3, birthday);
+			preparedStatement.setDate(3, birthday2);
+			//preparedStatement.setString(4, deptId);
+			preparedStatement.setInt(4, deptId);
+
+			// SQL文を実行
+			preparedStatement.executeUpdate();
+
+			// 登録完了メッセージを出力
+			System.out.println("社員情報を登録しました");
+		} finally {
+			DBManager.close(preparedStatement);
+			DBManager.close(connection);
+		}
+	}
+	
+	public static void insert2()
+			throws ClassNotFoundException, SQLException, IOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			// DBに接続
+			connection = DBManager.getConnection();
+
+			// ステートメントを作成
+			preparedStatement = connection.prepareStatement(ConstantSQL.SQL_INSERT);
 
 			// SQL文を実行
 			preparedStatement.executeUpdate();
