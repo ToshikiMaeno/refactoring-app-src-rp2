@@ -7,6 +7,7 @@ import java.util.List;
 import jp.co.sss.crud.db.EmployeeDAO;
 import jp.co.sss.crud.dto.Employee;
 import jp.co.sss.crud.io.ConsoleWriter;
+import jp.co.sss.crud.io.EmployeeDeptIdReader;
 
 public class EmployeeFindByDeptIdService implements IEmployeeService {
 	
@@ -16,11 +17,13 @@ public class EmployeeFindByDeptIdService implements IEmployeeService {
 		employeeDAO = new EmployeeDAO();
 		List<Employee> searchEmployees = null;
 		
+		ConsoleWriter.showHeadingDepartment();
+		int deptId = (int) new EmployeeDeptIdReader().input();
+		
 		// 全件表示機能の呼出
-		searchEmployees = employeeDAO.findDeptId();
+		searchEmployees = employeeDAO.findDeptId(deptId);
 		
 		ConsoleWriter.showEmployees(searchEmployees);
-		System.out.println("test3");//改行
 	}
 
 }

@@ -7,11 +7,18 @@ import java.io.InputStreamReader;
 public interface IConsoleReader {
 	public default Object input() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String menuNoStr = null;
+		String input = null;
 		
-		menuNoStr = br.readLine();
-		int input = Integer.parseInt(menuNoStr);
+		input = br.readLine();
+		//int input = Integer.parseInt(menuNoStr);
 		
+		if (isParseInt()) {
+			return Integer.parseInt(input);
+		}
+		
+		//return input;
 		return input;
 	}
+	
+	boolean isParseInt();
 }

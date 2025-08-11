@@ -1,10 +1,8 @@
 package jp.co.sss.crud.io;
 
-public class MenuNoReader implements IConsoleReader {
-
+public class EmployeeEmpIdReader implements IConsoleReader {
 	@Override
 	public boolean isParseInt() {
 		return true;
 	}
-	
 }

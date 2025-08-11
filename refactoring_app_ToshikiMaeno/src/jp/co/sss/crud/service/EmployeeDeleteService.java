@@ -2,11 +2,10 @@ package jp.co.sss.crud.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import jp.co.sss.crud.db.EmployeeDAO;
-import jp.co.sss.crud.dto.Employee;
 import jp.co.sss.crud.io.ConsoleWriter;
+import jp.co.sss.crud.io.EmployeeEmpIdReader;
 
 public class EmployeeDeleteService implements IEmployeeService {
 	
@@ -14,13 +13,18 @@ public class EmployeeDeleteService implements IEmployeeService {
 	
 	
 	public void execute() throws ClassNotFoundException, SQLException, IOException {
-		employeeDAO = new EmployeeDAO();
-		List<Employee> searchEmployees = null;
+		//employeeDAO = new EmployeeDAO();
+		//List<Employee> searchEmployees = null;
 		
 		// 全件表示機能の呼出
-		searchEmployees = employeeDAO.delete();
+		//searchEmployees = employeeDAO.delete();
 		
-		ConsoleWriter.showEmployees(searchEmployees);
+		//ConsoleWriter.showEmployees(searchEmployees);
+		ConsoleWriter.showHeadingEmpId();
+		Integer empId = (Integer) new EmployeeEmpIdReader().input();
+		employeeDAO = new EmployeeDAO();
+		Integer exeCount = employeeDAO.delete(empId);
+		ConsoleWriter.showCompleteDelete(exeCount);
 	}
 	
 	

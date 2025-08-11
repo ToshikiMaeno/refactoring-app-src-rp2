@@ -17,12 +17,14 @@ public class ConstantMsg {
 	
 	public static final String MENU_MESSAGE_EMPLOYEE_NAME = "社員名:";
 	public static final String MENU_MESSAGE_DEPTID_INPUT = "部署ID(1:営業部、2:経理部、3:総務部)を入力してください:";
-	public static final String MENU_MESSAGE_GENERAL = "性別(0:その他, 1:男性, 2:女性, 9:回答なし):";
+	//public static final String MENU_MESSAGE_GENERAL = "性別(0:その他, 1:男性, 2:女性, 9:回答なし):";
+	public static final String MENU_MESSAGE_GENERAL = "性別(0:回答しない, 1:男性, 2:女性, 9:その他):";
 	public static final String MENU_MESSAGE_BIRTHDAY = "生年月日(西暦年/月/日):";
 	public static final String MENU_MESSAGE_DEPTID = "部署ID(1:営業部、2:経理部、3:総務部):";
-	public static final String MENU_MESSAGE_EMPLOYEE_UPDATE_INPUT = "更新する社員の社員IDを入力してください：";
+	//public static final String MENU_MESSAGE_EMPLOYEE_UPDATE_INPUT = "更新する社員の社員IDを入力してください：";
 	public static final String MENU_MESSAGE_EMPLOYEE_INFORMATION_UPDATE = "社員情報を更新しました";
-	public static final String MENU_MESSAGE_EMPLOYEE_DELETE_INPUT = "削除する社員の社員IDを入力してください：";
+	//public static final String MENU_MESSAGE_EMPLOYEE_DELETE_INPUT = "削除する社員の社員IDを入力してください：";
+	public static final String MSG_EMP_ID = "社員IDを入力してください：";
 	public static final String MENU_MESSAGE_EMPLOYEE_INFORMATION_DELETE = "社員情報を削除しました";
 	public static final String MENU_MESSAGE_SYSTEM_END = "システムを終了します。";
 	
