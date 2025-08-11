@@ -14,10 +14,10 @@ public interface IConsoleReader {
 		String input = null;
 		try {
 		input = br.readLine();
-			//if (!isValid(input)) {
-			//	String errorMsg = getErrorMsg();
-			//	throw new IllegalInputException(errorMsg);
-			//} 
+			if (!isValid(input)) {
+				String errorMsg = getErrorMsg();
+				throw new IllegalInputException(errorMsg);
+			} 
 		} catch (IOException e) {
 			throw new SystemErrorException(MSG_SYSTEM_ERROR, e);
 		}

@@ -1,4 +1,5 @@
 package jp.co.sss.crud.io;
+import static jp.co.sss.crud.util.ConstantMsg.*;
 
 public class EmployeeNameReader implements IConsoleReader {
 	@Override
@@ -8,13 +9,11 @@ public class EmployeeNameReader implements IConsoleReader {
 
 	@Override
 	public boolean isValid(String inputString) {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return inputString.matches("^[あ-んーァ-ヶー一-龠]{1,30}$");//ひらがなかたかな漢字で1から30文字以内
 	}
 
 	@Override
 	public String getErrorMsg() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return MSG_ILLEGAL_INPUT;
 	}
 }

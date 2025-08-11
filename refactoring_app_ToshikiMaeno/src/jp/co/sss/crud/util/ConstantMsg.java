@@ -37,4 +37,7 @@ public class ConstantMsg {
 	public static final String MSG_NON_EXIST_TARGET = "対象者がいませんでした";
 	
 	public static final String MSG_SYSTEM_ERROR = "システムエラーです。";
+	public static final String MSG_ILLEGAL_INPUT = "不正な入力値です。再度入力してください";
+	
+	public static final String MSG_ILLEGAL_BIRTHDAY = "正しい形式(yyyy/MM/dd)で入力してください";
 }
