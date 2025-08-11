@@ -1,10 +1,13 @@
 package jp.co.sss.crud.service;
 
+import static jp.co.sss.crud.util.ConstantValue.*;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import jp.co.sss.crud.util.ConstantValue;
+import jp.co.sss.crud.exception.IllegalInputException;
+import jp.co.sss.crud.exception.SystemErrorException;
 
 public interface IEmployeeService {
 	/**
@@ -17,28 +20,28 @@ public interface IEmployeeService {
 		IEmployeeService newInstance = null;
 		/*====menuNoごとにインスタンスを生成する。必要に応じてcaseを追加する====*/
 		switch (menuNo) {
-			case ConstantValue.MENU_SELECT_ALL:
+			case MENU_SELECT_ALL:
 				newInstance = new EmployeeAllFindService();
 				break;
-			case ConstantValue.MENU_SEARCH_EMP_NAME:
+			case MENU_SEARCH_EMP_NAME:
 				newInstance = new EmployeeFindByEmpNameService();
 				break;
-			case ConstantValue.MENU_SEARCH_DEPT_ID:
+			case MENU_SEARCH_DEPT_ID:
 				newInstance = new EmployeeFindByDeptIdService();
 				break;
-			case ConstantValue.MENU_INSERT:
+			case MENU_INSERT:
 				newInstance = new EmployeeRegisterService();
 				break;
-			case ConstantValue.MENU_UPDATE:
+			case MENU_UPDATE:
 				newInstance = new EmployeeUpdateService();
 				break;
-			case ConstantValue.MENU_DELETE:
+			case MENU_DELETE:
 				newInstance = new EmployeeDeleteService();
 				break;
 		}
 		return newInstance;
 	}
 
-	public void execute() throws ClassNotFoundException, SQLException, IOException, ParseException;
+	public void execute() throws SystemErrorException, IllegalInputException, ParseException, IOException, ClassNotFoundException, SQLException;
 
 }

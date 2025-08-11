@@ -5,4 +5,16 @@ public class EmployeeGenderReader implements IConsoleReader {
 	public boolean isParseInt() {
 		return true;
 	}
+
+	@Override
+	public boolean isValid(String inputString) {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+
+	@Override
+	public String getErrorMsg() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

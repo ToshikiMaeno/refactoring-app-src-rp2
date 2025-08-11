@@ -7,6 +7,8 @@ import java.text.ParseException;
 import jp.co.sss.crud.db.EmployeeDAO;
 import jp.co.sss.crud.dto.Department;
 import jp.co.sss.crud.dto.Employee;
+import jp.co.sss.crud.exception.IllegalInputException;
+import jp.co.sss.crud.exception.SystemErrorException;
 import jp.co.sss.crud.io.ConsoleWriter;
 import jp.co.sss.crud.io.EmployeeBirthdayReader;
 import jp.co.sss.crud.io.EmployeeDeptIdReader;
@@ -19,7 +21,7 @@ public class EmployeeUpdateService implements IEmployeeService {
 	private EmployeeDAO employeeDAO;
 	
 	
-	public void execute() throws ClassNotFoundException, SQLException, IOException, ParseException {
+	public void execute() throws SystemErrorException, IllegalInputException, ClassNotFoundException, SQLException, IOException, ParseException {
 		ConsoleWriter.showHeadingEmpId();
 		Integer empId = (Integer) new EmployeeEmpIdReader().input();
 

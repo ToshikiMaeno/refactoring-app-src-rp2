@@ -6,13 +6,15 @@ import java.util.List;
 
 import jp.co.sss.crud.db.EmployeeDAO;
 import jp.co.sss.crud.dto.Employee;
+import jp.co.sss.crud.exception.IllegalInputException;
+import jp.co.sss.crud.exception.SystemErrorException;
 import jp.co.sss.crud.io.ConsoleWriter;
 import jp.co.sss.crud.io.EmployeeNameReader;
 
 public class EmployeeFindByEmpNameService implements IEmployeeService {
 	
 	private EmployeeDAO employeeDAO;
-	public void execute() throws ClassNotFoundException, SQLException, IOException {
+	public void execute() throws SystemErrorException, IllegalInputException, ClassNotFoundException, SQLException, IOException {
 		employeeDAO = new EmployeeDAO();
 		List<Employee> searchEmployees = null;
 		

@@ -35,4 +35,6 @@ public class ConstantMsg {
 	public static final String NO_ANSWER = "回答なし";
 	public static final String OTHER = "その他";
 	public static final String MSG_NON_EXIST_TARGET = "対象者がいませんでした";
+	
+	public static final String MSG_SYSTEM_ERROR = "システムエラーです。";
 }

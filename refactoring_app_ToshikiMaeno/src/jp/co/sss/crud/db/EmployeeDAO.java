@@ -1,5 +1,6 @@
 package jp.co.sss.crud.db;
 
+import static jp.co.sss.crud.util.ConstantMsg.*;
 import static jp.co.sss.crud.util.ConstantSQL.*;
 
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import jp.co.sss.crud.dto.Department;
 import jp.co.sss.crud.dto.Employee;
+import jp.co.sss.crud.exception.SystemErrorException;
 
 
 /**
@@ -32,7 +34,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws ClassNotFoundException ドライバクラスが不在の場合に送出
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 */
-	public static List<Employee> findAllDisplay() throws ClassNotFoundException, SQLException {
+	public static List<Employee> findAllDisplay() throws SystemErrorException, SQLException {
 		List<Employee> employees = new ArrayList<>();
 		Employee employee = null;
 		Department department = null;
@@ -62,6 +64,9 @@ public class EmployeeDAO implements IEmployeeDAO {
 			}
 
 			System.out.println("");
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new SystemErrorException(MSG_SYSTEM_ERROR, e);
+
 		} finally {
 			// ResultSetをクローズ
 			DBManager.close(resultSet);
@@ -80,7 +85,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static List<Employee> findEmployeeName(String searchName) throws ClassNotFoundException, SQLException, IOException {
+	public static List<Employee> findEmployeeName(String searchName) throws SystemErrorException, SQLException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		List<Employee> employees = new ArrayList<>();
 		Employee employee = null;
@@ -115,6 +120,9 @@ public class EmployeeDAO implements IEmployeeDAO {
 				employees.add(employee);
 			}
 
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new SystemErrorException(MSG_SYSTEM_ERROR, e);
+
 		} finally {
 			// クローズ処理
 			DBManager.close(resultSet);
@@ -133,7 +141,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static List<Employee> findDeptId(int deptId) throws ClassNotFoundException, SQLException, IOException {
+	public static List<Employee> findDeptId(int deptId) throws SystemErrorException, SQLException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		List<Employee> employees = new ArrayList<>();
 		Employee employee = null;
@@ -167,6 +175,9 @@ public class EmployeeDAO implements IEmployeeDAO {
 				employees.add(employee);
 			}
 
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new SystemErrorException(MSG_SYSTEM_ERROR, e);
+
 		} finally {
 			// クローズ処理
 			DBManager.close(resultSet);
@@ -191,7 +202,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws ParseException 
 	 */
 	public static void insert(Employee employee)
-			throws ClassNotFoundException, SQLException, IOException, ParseException {
+			throws SystemErrorException, ParseException, SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -213,6 +224,9 @@ public class EmployeeDAO implements IEmployeeDAO {
 			preparedStatement.executeUpdate();
 			// 登録完了メッセージを出力
 			System.out.println("社員情報を登録しました");
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new SystemErrorException(MSG_SYSTEM_ERROR, e);
+
 		} finally {
 			DBManager.close(preparedStatement);
 			DBManager.close(connection);
@@ -229,7 +243,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws ParseException 
 	 */
 	public static Integer update(Employee employee)
-			throws ClassNotFoundException, SQLException, IOException, ParseException {
+			throws SystemErrorException, ParseException, SQLException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Connection connection = null;
@@ -255,6 +269,9 @@ public class EmployeeDAO implements IEmployeeDAO {
 			// SQL文の実行(失敗時は戻り値0)
 			exeCount = preparedStatement.executeUpdate();
 
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new SystemErrorException(MSG_SYSTEM_ERROR, e);
+
 		} finally {
 			// クローズ処理
 			DBManager.close(preparedStatement);
@@ -271,7 +288,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public Integer delete(Integer empId) throws IOException {
+	public Integer delete(Integer empId) throws SystemErrorException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Integer exeCount = null;

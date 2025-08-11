@@ -4,12 +4,12 @@ package jp.co.sss.crud.main;
 import static jp.co.sss.crud.util.ConstantMsg.*;
 import static jp.co.sss.crud.util.ConstantValue.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import jp.co.sss.crud.exception.IllegalInputException;
+import jp.co.sss.crud.exception.SystemErrorException;
 import jp.co.sss.crud.io.ConsoleWriter;
 import jp.co.sss.crud.io.MenuNoReader;
 import jp.co.sss.crud.service.IEmployeeService;
@@ -29,29 +29,37 @@ public class MainSystem {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * @throws ParseException 
+	 * @throws IllegalInputException 
+	 * @throws SystemErrorException 
 	 */
-	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, ParseException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+	public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
 		MenuNoReader menuNoReader = new MenuNoReader();
 		int menuNo = 0;
 
 		do {
-			// メニューの表示
-			ConsoleWriter.showMenu();
+			try {
+				// メニューの表示
+				ConsoleWriter.showMenu();
 
-			// メニュー番号の入力
-			menuNo = (int) menuNoReader.input();
+				// メニュー番号の入力
+				menuNo = (int) menuNoReader.input();
 			
-			if (menuNo == MENU_END) {
-				break;
+				if (menuNo == MENU_END) {
+					break;
 			}
 			
-			//ビジネスロジックの呼び出し
-			IEmployeeService service = IEmployeeService.getInstanceByMenuNo(menuNo);
-			service.execute();
-
-	
+				//ビジネスロジックの呼び出し
+				IEmployeeService service = IEmployeeService.getInstanceByMenuNo(menuNo);
+				service.execute();
+			} catch (IllegalInputException | ParseException e) {//不正な入力があった場合、ループに戻る
+				System.out.println(e.getMessage());
+				System.out.println();
+				continue;
+			} catch (SystemErrorException e) {//継続不能なエラーの場合、ループを抜ける
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				break;
+			}
 		} while (menuNo != MENU_END);
 		// システム終了
 		System.out.println(MENU_MESSAGE_SYSTEM_END);
