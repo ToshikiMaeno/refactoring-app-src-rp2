@@ -1,6 +1,6 @@
 package jp.co.sss.crud.db;
 
-import static jp.co.sss.crud.util.ConstantSQL.*;
+import static jp.co.sss.crud.util.ConstantValue.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
