@@ -3,40 +3,41 @@ package jp.co.sss.crud.service;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import jp.co.sss.crud.util.ConstantMsg;
+import jp.co.sss.crud.util.ConstantValue;
 
 public interface IEmployeeService {
+	/**
+	 * サービスクラスのインスタンスを生成する
+	 * @param menuNo
+	 * @return IEmployeeServiceを実装したサービスクラス
+	 */
 	
-
 	public static IEmployeeService getInstanceByMenuNo(int menuNo) {
 		IEmployeeService newInstance = null;
+		/*====menuNoごとにインスタンスを生成する。必要に応じてcaseを追加する====*/
 		switch (menuNo) {
-			case 1:
+			case ConstantValue.MENU_SELECT_ALL:
 				newInstance = new EmployeeAllFindService();
 				break;
-			case 2:
+			case ConstantValue.MENU_SEARCH_EMP_NAME:
 				newInstance = new EmployeeFindByEmpNameService();
 				break;
-			case 3:
+			case ConstantValue.MENU_SEARCH_DEPT_ID:
 				newInstance = new EmployeeFindByDeptIdService();
 				break;
-			case 4:
+			case ConstantValue.MENU_INSERT:
 				newInstance = new EmployeeRegisterService();
 				break;
-			case 5:
+			case ConstantValue.MENU_UPDATE:
 				newInstance = new EmployeeUpdateService();
 				break;
-			case 6:
+			case ConstantValue.MENU_DELETE:
 				newInstance = new EmployeeDeleteService();
-				break;
-			case 7:
-				System.out.println(ConstantMsg.MENU_MESSAGE_SYSTEM_END);
 				break;
 		}
 		return newInstance;
 	}
 
 	public void execute() throws ClassNotFoundException, SQLException, IOException;
-	//public void execute() throws ClassNotFoundException, SQLException;
 
 }

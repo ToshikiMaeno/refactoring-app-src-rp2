@@ -16,12 +16,10 @@ public class EmployeeAllFindService implements IEmployeeService {
 		employeeDAO = new EmployeeDAO();
 		List<Employee> searchEmployees = null;
 		
-		//System.out.println();//改行
 		// 全件表示機能の呼出
 		searchEmployees = employeeDAO.findAllDisplay();
 		
 		ConsoleWriter.showEmployees(searchEmployees);
-		//System.out.println("test");//改行
 	}
 	
 	
