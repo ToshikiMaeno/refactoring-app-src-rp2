@@ -28,5 +28,9 @@ public class ConstantMsg {
 	
 	
 	public static final String HEADER = "社員ID\t社員名\t性別\t生年月日\t部署名";
+	public static final String MALE = "男性";
+	public static final String FEMALE = "女性";
+	public static final String NO_ANSWER = "回答なし";
+	public static final String OTHER = "その他";
 	public static final String MSG_NON_EXIST_TARGET = "対象者がいませんでした";
 }

@@ -1,14 +1,18 @@
 package jp.co.sss.crud.main;
 
+//import jp.co.sss.crud.util.ConstantMsg;
+import static jp.co.sss.crud.util.ConstantMsg.*;
+import static jp.co.sss.crud.util.ConstantValue.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import jp.co.sss.crud.io.ConsoleWriter;
+import jp.co.sss.crud.io.MenuNoReader;
 import jp.co.sss.crud.service.IEmployeeService;
-import jp.co.sss.crud.util.ConstantMsg;
-import jp.co.sss.crud.util.ConstantValue;
 
 /**
  * 社員情報管理システム開始クラス 社員情報管理システムはこのクラスから始まる。<br/>
@@ -28,18 +32,22 @@ public class MainSystem {
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, ParseException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+		
+		MenuNoReader menuNoReader = new MenuNoReader();
 		int menuNo = 0;
 
 		do {
 			// メニューの表示
-			System.out.print(ConstantMsg.MENU_MESSAGE_ALL_DISPLAY);
+			//System.out.print(MENU_MESSAGE_ALL_DISPLAY);
+			ConsoleWriter.showMenu();
 
 			// メニュー番号の入力
-			String menuNoStr = br.readLine();
-			menuNo = Integer.parseInt(menuNoStr);
+			//String menuNoStr = br.readLine();
+			//menuNo = Integer.parseInt(menuNoStr);
 			
-			if (menuNo == ConstantValue.MENU_END) {
+			menuNo = (int) menuNoReader.input();
+			
+			if (menuNo == MENU_END) {
 				break;
 			}
 			
@@ -48,8 +56,8 @@ public class MainSystem {
 			service.execute();
 
 	
-		} while (menuNo != ConstantValue.MENU_END);
+		} while (menuNo != MENU_END);
 		// システム終了
-		System.out.println(ConstantMsg.MENU_MESSAGE_SYSTEM_END);
+		System.out.println(MENU_MESSAGE_SYSTEM_END);
 	}
 }

@@ -1,4 +1,5 @@
 package jp.co.sss.crud.dto;
+import static jp.co.sss.crud.util.ConstantMsg.*;
 
 public class Employee {
 	private Integer empId;
@@ -59,4 +60,24 @@ public class Employee {
 	public Department getDepartment() {
 		return department;
 	}
+	
+	
+	public String toString() {
+		String gender_ja = "";
+		if (this.gender == 1) {
+			gender_ja = MALE;
+		} else if (this.gender == 2) {
+			gender_ja = FEMALE;
+		} else if (this.gender == 0) {
+			gender_ja = NO_ANSWER;
+		} else if (this.gender == 9) {
+			gender_ja = OTHER;
+		}
+
+		return empId + "\t" + empName + "\t" + gender_ja + "\t" + birthday
+				+ "\t" + department.getDeptName() + "\n";
+	}
+	
+	
+	
 }
