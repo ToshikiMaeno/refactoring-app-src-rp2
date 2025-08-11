@@ -13,13 +13,6 @@ public class EmployeeDeleteService implements IEmployeeService {
 	
 	
 	public void execute() throws ClassNotFoundException, SQLException, IOException {
-		//employeeDAO = new EmployeeDAO();
-		//List<Employee> searchEmployees = null;
-		
-		// 全件表示機能の呼出
-		//searchEmployees = employeeDAO.delete();
-		
-		//ConsoleWriter.showEmployees(searchEmployees);
 		ConsoleWriter.showHeadingEmpId();
 		Integer empId = (Integer) new EmployeeEmpIdReader().input();
 		employeeDAO = new EmployeeDAO();

@@ -38,13 +38,9 @@ public class MainSystem {
 
 		do {
 			// メニューの表示
-			//System.out.print(MENU_MESSAGE_ALL_DISPLAY);
 			ConsoleWriter.showMenu();
 
 			// メニュー番号の入力
-			//String menuNoStr = br.readLine();
-			//menuNo = Integer.parseInt(menuNoStr);
-			
 			menuNo = (int) menuNoReader.input();
 			
 			if (menuNo == MENU_END) {

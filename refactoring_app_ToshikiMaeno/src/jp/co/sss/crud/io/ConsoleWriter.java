@@ -68,33 +68,7 @@ public class ConsoleWriter {
 		} else {
 			showHeader();
 			for (Employee employee : employees) {
-				
-				//System.out.print(employee.getEmpId()+ "\t");
-				//System.out.print(employee.getEmpName()+ "\t");
-				//int gender = employee.getGender();
-				
-				//if (gender == 0) {
-				//	System.out.print("回答なし" + "\t");
-				//} else if (gender == 1) {
-				//	System.out.print("男性" + "\t");
-
-				//} else if (gender == 2) {
-				//	System.out.print("女性" + "\t");
-
-				//} else if (gender == 9) {
-				//	System.out.print("その他" + "\t");
-
-				//}
-				//System.out.print(employee.getBirthday()+ "\t");
-				//System.out.println(employee.getDepartment().getDeptName());
-				
-				
-				
-				
-				
 				System.out.print(employee.toString());
-				
-				
 			}
 		}
 	}

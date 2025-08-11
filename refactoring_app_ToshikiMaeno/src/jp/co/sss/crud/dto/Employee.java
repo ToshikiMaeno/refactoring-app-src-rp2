@@ -19,9 +19,6 @@ public class Employee {
 	public Employee() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-	//public Employee() {
-		// TODO 自動生成されたコンストラクター・スタブ
-	//}
 	public void setEmpId(Integer empId) {
 		this.empId = empId;
 		

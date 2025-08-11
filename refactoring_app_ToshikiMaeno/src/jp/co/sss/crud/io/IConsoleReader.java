@@ -8,15 +8,11 @@ public interface IConsoleReader {
 	public default Object input() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String input = null;
-		
 		input = br.readLine();
-		//int input = Integer.parseInt(menuNoStr);
 		
 		if (isParseInt()) {
 			return Integer.parseInt(input);
 		}
-		
-		//return input;
 		return input;
 	}
 	

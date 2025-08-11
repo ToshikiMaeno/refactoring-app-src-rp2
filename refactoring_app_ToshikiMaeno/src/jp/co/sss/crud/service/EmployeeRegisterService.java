@@ -19,14 +19,6 @@ public class EmployeeRegisterService implements IEmployeeService {
 	
 	
 	public void execute() throws ClassNotFoundException, SQLException, IOException, ParseException {
-		//employeeDAO = new EmployeeDAO();
-		//List<Employee> searchEmployees = null;
-		
-		// 全件表示機能の呼出
-		//searchEmployees = employeeDAO.insert();
-		
-		//ConsoleWriter.showEmployees(searchEmployees);
-		
 		ConsoleWriter.showHeadingEmployeeName();
 		String name = (String) new EmployeeNameReader().input();
 
