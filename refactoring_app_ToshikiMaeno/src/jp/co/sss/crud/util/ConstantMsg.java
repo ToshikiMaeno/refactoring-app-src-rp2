@@ -26,4 +26,7 @@ public class ConstantMsg {
 	public static final String MENU_MESSAGE_EMPLOYEE_INFORMATION_DELETE = "社員情報を削除しました";
 	public static final String MENU_MESSAGE_SYSTEM_END = "システムを終了します。";
 	
+	
+	public static final String HEADER = "社員ID\t社員名\t性別\t生年月日\t部署名";
+	public static final String MSG_NON_EXIST_TARGET = "対象者がいませんでした";
 }

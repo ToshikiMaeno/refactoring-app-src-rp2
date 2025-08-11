@@ -1,28 +1,33 @@
 package jp.co.sss.crud.io;
 
+import static jp.co.sss.crud.util.ConstantMsg.*;
+
 import java.util.List;
 
 import jp.co.sss.crud.dto.Employee;
 
 public class ConsoleWriter {
+	
+	public static void showHeader() {
+		System.out.println(HEADER);
+	}
+	
+	public static void showNonExistTarget() {
+		System.out.println(MSG_NON_EXIST_TARGET);
+	}
+	
 	public static void showEmployees(List<Employee> employees) {
 		if (employees.isEmpty()) {
-			//showNonExistTarget();
+			showNonExistTarget();
 		} else {
-			//showHeader();
-			
-			
-			System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			showHeader();
+			//System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
 			for (Employee employee : employees) {
 				
-				//System.out.println(employee);
-				//Department department = new Department();
 				System.out.print(employee.getEmpId()+ "\t");
-				
 				System.out.print(employee.getEmpName()+ "\t");
-				
-				//System.out.print(employee.getGender()+ "\t");
 				int gender = employee.getGender();
+				
 				if (gender == 0) {
 					System.out.print("回答なし" + "\t");
 				} else if (gender == 1) {
@@ -37,8 +42,6 @@ public class ConsoleWriter {
 				}
 				
 				System.out.print(employee.getBirthday()+ "\t");
-				
-				//System.out.println(department.getDeptName());
 				System.out.println(employee.getDepartment().getDeptName());
 				
 				
