@@ -30,11 +30,11 @@ public class EmployeeDAO implements IEmployeeDAO {
 
 	/**
 	 * 全ての社員情報を検索
+	 * @throws SQLException 
 	 *
 	 * @throws ClassNotFoundException ドライバクラスが不在の場合に送出
-	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 */
-	public static List<Employee> findAllDisplay() throws SystemErrorException, SQLException {
+	public List<Employee> findAllDisplay() throws SystemErrorException, SQLException {
 		List<Employee> employees = new ArrayList<>();
 		Employee employee = null;
 		Department department = null;
@@ -85,7 +85,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static List<Employee> findEmployeeName(String searchName) throws SystemErrorException, SQLException {
+	public List<Employee> findEmployeeName(String searchName) throws SystemErrorException, SQLException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		List<Employee> employees = new ArrayList<>();
 		Employee employee = null;
@@ -141,7 +141,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static List<Employee> findDeptId(int deptId) throws SystemErrorException, SQLException {
+	public List<Employee> findDeptId(int deptId) throws SystemErrorException, SQLException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		List<Employee> employees = new ArrayList<>();
 		Employee employee = null;
@@ -201,7 +201,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 * @throws ParseException 
 	 */
-	public static void insert(Employee employee)
+	public void insert(Employee employee)
 			throws SystemErrorException, ParseException, SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -242,7 +242,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 * @throws ParseException 
 	 */
-	public static Integer update(Employee employee)
+	public Integer update(Employee employee)
 			throws SystemErrorException, ParseException, SQLException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
